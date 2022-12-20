@@ -20,7 +20,7 @@ const commands = [
     '!shout @userName',
     //' !title "Title Name"',
     '!hug @userName',
-    //'!sovip',
+    '!sovip',
     '!dice',
     '!toss',
     '!grn',
@@ -35,7 +35,7 @@ client.on('message', (channel, tags, message, self) => {
     if (message.toLowerCase() === '!hello') {
         client.say(channel, `@${tags.username}, Yo what's up`)
     } else if (message.toLowerCase() === '!throw') {
-        client.say(channel, 'there is no throw game in this chat LUL !!')
+        client.say(channel, 'No one is throwing anyone in my view  LUL !!')
     } else if (message.toLowerCase() === '!commands') {
         client.say(channel, commands.join(' , '))
     } else if (message.toLowerCase().includes('!shout')) {
@@ -54,14 +54,14 @@ client.on('message', (channel, tags, message, self) => {
             txt = txt[1].slice(1)
             client.say(
                 channel,
-                ` @${tags.username} hugged @${txt}!!! Good for them GivePLZ TakeNRG`
+                ` Awww!!  @${tags.username} hugged @${txt}!!! Good for them GivePLZ TakeNRG`
             )
         } else client.say(channel, `@${tags.username}, plz user !hug @userName`)
     } else if (message.toLowerCase().includes('!sovip')) {
         for (const vip of vips)
             client.say(
                 channel,
-                `@${vip}, follow them on  https://twitch.tv/${vip} \n`
+                `@${vip}, is one of our VIP, follow them on  https://twitch.tv/${vip} \n`
             )
     } else if (message.toLowerCase() === '!dice') {
         client.say(channel, `@${tags.username} YOU GOT ${dice()}`)
