@@ -11,7 +11,7 @@ const client = new tmi.Client({
         username: process.env.USER_NAME,
         password: process.env.OAUTH_TOKEN,
     },
-    channels: [process.env.CHANNEL, 'ashoktamil'],
+    channels: process.env.CHANNEL.split('@'),
 })
 
 const commands = [
@@ -20,7 +20,6 @@ const commands = [
     '!shout @userName',
     //' !title "Title Name"',
     '!hug @userName',
-    '!sovip',
     '!dice',
     '!toss',
     '!grn',
@@ -57,12 +56,6 @@ client.on('message', (channel, tags, message, self) => {
                 ` Awww!!  @${tags.username} hugged @${txt}!!! Good for them GivePLZ TakeNRG`
             )
         } else client.say(channel, `@${tags.username}, plz user !hug @userName`)
-    } else if (message.toLowerCase().includes('!sovip')) {
-        for (const vip of vips)
-            client.say(
-                channel,
-                `@${vip}, is one of our VIP, follow them on  https://twitch.tv/${vip} \n`
-            )
     } else if (message.toLowerCase() === '!dice') {
         client.say(channel, `@${tags.username} YOU GOT ${dice()}`)
     } else if (message.toLowerCase() === '!grn') {
