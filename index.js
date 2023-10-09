@@ -11,6 +11,7 @@ const msg = "I'm taking a break, I can't join the stream in-person, so I joined 
 
 const channels = [
     "bridgie_bee#theone353Hey theone353Hey @bridgie_bee, " + msg,
+    "missyruth#theone353Hey theone353Hey @missyruth, " + msg,
     "ashoktamil#theone353Hey theone353Hey @ashoktamil, " + msg,
     "chibi_mhay#theone353Hey theone353Hey @chibi_mhay Chibi Chibi, " + msg,
     "lumella#theone353Hey theone353Hey @lumella, " + msg,
