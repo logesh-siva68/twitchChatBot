@@ -18,7 +18,6 @@ const channels = [
     "z3nsei_tv#theone353Hey theone353Hey @z3nsei_tv, " + msg,
     "icursor#theone353Hey theone353Hey @icursor bro, " + msg,
     "ladyversailles#theone353Hey theone353Hey @ladyversailles, " + msg,
-    "ladyversailles#theone353Hey theone353Hey @ladyversailles, " + msg,
     
 ];
 
