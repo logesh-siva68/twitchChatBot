@@ -29,8 +29,8 @@ const client = new tmi.Client({
         reconnect: true,
     },
     identity: {
-        username: 'theOneLoki',
-        password: 'oauth:61deocphgbwuzdbg4r0fa4dvel7l9v',
+        username: process.env.USERNAME,
+        password: process.env.PASSWORD,
     },
     channels: makeGreat().map((item)=> item.channel)
 })
