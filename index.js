@@ -1,6 +1,11 @@
 require('dotenv').config()
 const tmi = require('tmi.js')
 const moment = require('moment')
+const express = require('express')
+
+const app = express()
+
+const port = process.env.PORT || 3000
 
 const msg = "I'm taking a break, I can't join the stream in-person, so I joined programmatically to so some love!!! From now on I will great you every 2 hours (with the same message tho!!) if the chat is live, try these commands !dice, !toss, and !hello for fun theone353Love  theone353Love";
 
@@ -74,7 +79,7 @@ client.on('message', (channel, tags, message, self) =>  {
     } 
     else if(isGreated && tags.username !== 'theoneloki'){
         let duration = moment(moment().format()).diff(channelObj[0].lastGreated, 'hours')
-        if(duration > 2){
+        if(duration > 3){
             client.say(channel, channelObj[0].message)
             setGreat(altCh)
         }
@@ -181,3 +186,10 @@ function setGreat(channel){
 
     //console.log(greatChannels)
 }
+
+app.get('/',(req,res)=>{
+    res.send("<h1>The One Loki chat bot</h1> <p>" + JSON.stringify(greatChannels) + "</p>")
+})
+app.listen(port, ()=>{
+    console.log("app running")
+})
