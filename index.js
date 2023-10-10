@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000
 
 const healthUrl = `http://localhost:${port}/health`;
 
-const msg = "I'm taking a break, I can't join the stream in-person, so I joined programmatically to so some love!!! From now on I will great you every 2 hours (with the same message tho!!) if the chat is live, try these commands !dice, !toss, and !hello for fun theone353Love  theone353Love";
+const msg = "hope u doing good, reminder to hydrate and stretch, try these commands !dice, !toss, and !hello for fun theone353Love  theone353Love (Note: it is automated message!!)";
 
 const channels = [
     "bridgie_bee#theone353Hey theone353Hey @bridgie_bee, " + msg,
@@ -76,23 +76,22 @@ client.on('message', (channel, tags, message, self) =>  {
     //console.log("channelObj",channelObjInx)
     if(channelObjInx === 0 ) channelObj.push({...greatChannels[0]})
     else if(channelObjInx > 0)  channelObj.push({...greatChannels[channelObjInx]})
-    let isGreated = channelObj[0].isGreated || false
-    //console.log(`$channelObj: ${JSON.stringify(channelObj)} - $isGreated: ${isGreated}` )
+    let isGreeted = channelObj[0].isGreeted || false
+    //console.log(`$channelObj: ${JSON.stringify(channelObj)} - $isGreeted: ${isGreeted}` )
 
-    /*
-    if(!isGreated && tags.username !== 'theoneloki'){
+    
+    if(!isGreeted && tags.username !== 'theoneloki'){
         client.say(channel, channelObj[0].message)
         setGreat(altCh)           
     } 
-    else if(isGreated && tags.username !== 'theoneloki'){
-        let duration = moment(moment().format()).diff(channelObj[0].lastGreated, 'hours')
+    else if(isGreeted && tags.username !== 'theoneloki'){
+        let duration = moment(moment().format()).diff(channelObj[0].lastGreeted, 'hours')
         if(duration > 3){
             client.say(channel, channelObj[0].message)
             setGreat(altCh)
         }
         
     }
-    */
     if (message.toLowerCase() === '!dice') {
         //console.log("dice")
         client.say(channel, `@${tags.username} YOU GOT ${dice()}`)
@@ -170,8 +169,8 @@ function makeGreat(){
         for(let c of channels){
             arr.push({
                 channel:c.split("#")[0],
-                isGreated:false,
-                lastGreated: moment().format(),
+                isGreeted:false,
+                lastGreeted: moment().format(),
                 message:c.split("#")[1]
             })
         }
@@ -185,8 +184,8 @@ function setGreat(channel){
         //console.log("1",i)
         //console.log("1x",channel)
         if(i.channel === channel){
-            i.isGreated = true;
-            i.lastGreated = moment().format()
+            i.isGreeted = true;
+            i.lastGreeted = moment().format()
         }
         //console.log("2",i)
 
