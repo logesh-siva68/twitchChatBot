@@ -2,10 +2,15 @@ require('dotenv').config()
 const tmi = require('tmi.js')
 const moment = require('moment')
 const express = require('express')
+const axios = require('axios')
 
 const app = express()
 
+app.use(express.json())
+
 const port = process.env.PORT || 3000
+
+const healthUrl = `http://localhost:${port}/health`;
 
 const msg = "I'm taking a break, I can't join the stream in-person, so I joined programmatically to so some love!!! From now on I will great you every 2 hours (with the same message tho!!) if the chat is live, try these commands !dice, !toss, and !hello for fun theone353Love  theone353Love";
 
@@ -74,6 +79,7 @@ client.on('message', (channel, tags, message, self) =>  {
     let isGreated = channelObj[0].isGreated || false
     //console.log(`$channelObj: ${JSON.stringify(channelObj)} - $isGreated: ${isGreated}` )
 
+    /*
     if(!isGreated && tags.username !== 'theoneloki'){
         client.say(channel, channelObj[0].message)
         setGreat(altCh)           
@@ -86,6 +92,7 @@ client.on('message', (channel, tags, message, self) =>  {
         }
         
     }
+    */
     if (message.toLowerCase() === '!dice') {
         //console.log("dice")
         client.say(channel, `@${tags.username} YOU GOT ${dice()}`)
@@ -191,6 +198,24 @@ function setGreat(channel){
 app.get('/',(req,res)=>{
     res.send("<h1>The One Loki chat bot</h1> <p>" + JSON.stringify(greatChannels) + "</p>")
 })
-app.listen(port, ()=>{
+
+app.get('/health', (req,res)=>{
+    res.status(200).json({"message":"up and works fine in port " + port})
+})
+app.listen(port, async()=>{
     console.log("app running")
+    try{
+        let fetchData = await axios.get(healthUrl)
+        console.log("fetchData--->", fetchData?.data || "nulls")
+    } catch(err){
+        console.log(err)
+    }
+    setInterval(async () => {
+        try{
+            let fetchData = await axios.get(healthUrl)
+            console.log("fetchData--->", fetchData?.data || "nulls")
+        } catch(err){
+            console.log(err)
+        }
+    }, 780000);
 })
