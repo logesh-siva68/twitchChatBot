@@ -86,7 +86,7 @@ client.on('message', (channel, tags, message, self) =>  {
     } 
     else if(isGreeted && tags.username !== 'theoneloki'){
         let duration = moment(moment().format()).diff(channelObj[0].lastGreeted, 'hours')
-        if(duration > 3){
+        if(duration > 2){
             client.say(channel, channelObj[0].message)
             setGreat(altCh)
         }
@@ -195,7 +195,12 @@ function setGreat(channel){
 }
 
 app.get('/',(req,res)=>{
-    res.send("<h1>The One Loki chat bot</h1> <p>" + JSON.stringify(greatChannels) + "</p>")
+    let html = '<h1>The One Loki chat bot</h1> <ul>'
+    for(let greet of greatChannels){
+        html = html + `<li> ${greet.channel} -- ${greet.isGreeted ? "Yeah!!!" : "Nahhh"} -- ${moment(greet.lastGreeted).utcOffset("+05:30").format('MMMM Do YYYY, h:mm a')}</li>`
+    }
+    html = html + "</ul>"
+    res.send(html)
 })
 
 app.get('/health', (req,res)=>{
